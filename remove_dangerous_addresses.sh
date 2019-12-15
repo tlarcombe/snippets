@@ -13,3 +13,16 @@ sed -i '/domain.com/d' ./email2.txt
 sed -i '/domino.com/d' ./email2.txt 
 sed -i '/buttonizer/d' ./email2.txt 
 sed -i '/themepunch/d' ./email2.txt 
+sed -i '/Crimestoppers/d' ./email2.txt 
+sed -i '/crimestoppers-uk/d' ./email2.txt 
+sed -i '/impress.press/d' ./email2.txt 
+sed -i '/statcounter/d' ./email2.txt 
+sed -i '/cloudflare/d' ./email2.txt 
+sed -i '/t.co/d' ./email2.txt 
+sed -i '/facebook/d' ./email2.txt 
+sed -i '/rightmove/d' ./email2.txt 
+sed -i '/snapsurveys/d' ./email2.txt 
+sed -i '/police/d' ./email2.txt 
+sed -i '/youtube/d' ./email2.txt 
+sed -i '/youronlinechoices/d' ./email2.txt 
+
