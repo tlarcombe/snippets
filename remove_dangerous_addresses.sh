@@ -25,4 +25,6 @@ sed -i '/snapsurveys/d' ./email2.txt
 sed -i '/police/d' ./email2.txt 
 sed -i '/youtube/d' ./email2.txt 
 sed -i '/youronlinechoices/d' ./email2.txt 
+sed -i '/yext/d' ./email2.txt
+
 
