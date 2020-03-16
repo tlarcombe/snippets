@@ -1,0 +1,34 @@
+pacman -Qqe | grep -v base > ~/packages.txt
+# will create a text file in you home directory with a list of all of the packages you have explicitly installed
+# other than base. Open the file in a text editor. Delete any packages you want to keep. 
+# When you are done, save the file. It should now contain a list of the explicitly installed packages you 
+# would like to remove. Remove them by running:
+
+pacman -Rs < ~/packages.txt
+
+# If you aren't sure what a particular package does, use:
+
+pacman -Qii $PACKAGE_NAME
+#or look it up on the wiki. 
+#Be sure to leave things like Xorg/Wayland, pulseaudio, graphics drivers etc. alone unless you actually want to 
+# go through the trouble of reinstalling them.
+
+# Also, I don't know of a way to check when a package was last used, but you can look at:
+
+cat /var/log/pacman.log 
+# to see when different packages where installed or updated.
+
+# Additionally, if running:
+
+pacman -Rs <~/packages.txt
+# fails because packages in that list are required by another program you're not removing, 
+# then you'll need to take them off that list, but I also suggest putting them into another list,
+#say, ~/dependencies.txt. Continue this until the first command succeeds. Now, you can run:
+
+pacman -D --asdeps <~/dependencies.txt
+# which will mark those as automatically installed, so when they're no longer required then they'll be removed 
+# with any given:
+
+pacman -Rs
+
+Every so often I'll look through my list of explicitly installed packages, and set any I don't actually want as dependencies, making sure they'll be removed as soon as they're not needed.
