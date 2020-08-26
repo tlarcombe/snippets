@@ -5,4 +5,8 @@ cat inputips.csv | while read IPS; do
 
 curl https://api.ipdata.co/"$IPS"?api-key=1f25ff40e5e1bdde99983aa901bc64cf20e15fbead346c1d5ee469cb >> output.txt;
 
+#Compare the output
+
+curl https://api.ipregistry.co/109.203.102.121?key=tryout&pretty=true
+
 done
