@@ -1,1 +1,5 @@
+#!/bin/bash
+
 nice -n 20 ionice -c 3 cp {/path/to/large/file/filename.ext} {path/to/destination/}
+
+#Consider using rsync instead
