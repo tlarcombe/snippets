@@ -10,7 +10,7 @@ fdisk /dev/sda
 mkfs.ext4 /dev/sda1
 mkfs.ext4 /dev/sda2
 
-# Mount the filesystem
+# Mount the filesystem - home on a seperate partition, but would be better on a seperate disk
 mount /dev/sda1 /mnt
 mkdir /mnt/home
 mount /dev/sda2 /mnt/home
