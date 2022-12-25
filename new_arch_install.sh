@@ -16,7 +16,7 @@ mkdir /mnt/home
 mount /dev/sda2 /mnt/home
 
 # Install base packages
-pacstrap /mnt base
+pacstrap /mnt base linux linux-firmware
 
 # Generate fstab file
 genfstab -U /mnt >> /mnt/etc/fstab
