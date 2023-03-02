@@ -1,0 +1,3 @@
+This formula will extract the last word in all the above cases.
+"Smith", "Doe", "", "Smithson", "Harry"
+=IF(ISERR(FIND(" ",A2)),IF(LEN(A2)=0,"",A2),RIGHT(A2,LEN(A2)-FIND("*",SUBSTITUTE(A2," ","*",LEN(A2)-LEN(SUBSTITUTE(A2," ",""))))))
