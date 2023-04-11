@@ -1,0 +1,63 @@
+## /ussr/bin/power-log.sh
+#!/bin/bash
+
+# Function to log the power status
+function log_power_status {
+    # Get the current date and time
+    now=$(date +"%Y-%m-%d %T")
+
+    # Check the power status
+    if [ "$(cat /sys/class/power_supply/AC/online)" -eq 0 ]; then
+        echo "$now Mains power disconnected" >> /var/log/power.log
+    else
+        echo "$now Mains power connected" >> /var/log/power.log
+    fi
+}
+
+# Log the initial power status
+log_power_status
+
+# Monitor the power status in a loop
+while true; do
+    # Wait for a change in the power status
+    while [ "$(cat /sys/class/power_supply/AC/online)" -eq "$power_status" ]; do
+        sleep 1
+    done
+
+    # Log the new power status
+    log_power_status
+
+    # Update the current power status
+    power_status=$(cat /sys/class/power_supply/AC/online)
+done
+
+
+
+
+## /etc/systemd/system/power-monitor.service
+[Unit]
+Description=Power monitor
+
+[Service]
+Type=simple
+Environment="DISPLAY=:0"
+Environment="XAUTHORITY=/run/user/$(id -u)/lightdm/Xauthority"
+ExecStart=/usr/bin/power-log.sh
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+## /etc/acpi/events/power-monitor
+event=ac_adapter
+action=/usr/bin/systemctl start power-monitor.service
+
+
+## Remebber to restart acpid
+sudo systemctl restart acpid
+
+
+
+
