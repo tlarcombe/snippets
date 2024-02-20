@@ -1,0 +1,27 @@
+### To quickly remove IP address lines from ~/.ssh/known_hosts
+
+### Usage: tidy_known_hosts nnn.nnn.nnn.nnn (IP address)
+
+#!/bin/bash
+
+ip=$1
+
+
+# Basic IP address format check
+if [[ ! $ip =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "Invalid IP address"
+    exit 1
+fi
+
+# Search for lines matching IP address and ask for confirmation
+grep -n $ip ~/.ssh/known_hosts
+read -p "Do you want to delete these lines? (y/n) " answer
+
+
+# Remove lines containing IP address from users (~/.ssh/known_hosts) known_hosts file
+if [ "$answer" == "y" ]; then
+    sed -i "/$ip/d" ~/.ssh/known_hosts
+    echo "Lines containing $ip have been removed from known_hosts file"
+else
+    echo "No lines were deleted"
+fi
